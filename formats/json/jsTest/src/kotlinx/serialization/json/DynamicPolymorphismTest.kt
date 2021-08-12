@@ -8,6 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import kotlinx.serialization.test.noLegacyJs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -84,7 +85,7 @@ class DynamicPolymorphismTest {
     }
 
     @Test
-    fun testCustomClassDiscriminator() {
+    fun testCustomClassDiscriminator() = noLegacyJs {
         val value = SealedCustom.DataClassChild("custom-discriminator-test")
         encodeAndDecode(SealedCustom.serializer(), value, objectJson) {
             assertEquals("data_class", this["sealed_custom"])

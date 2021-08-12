@@ -1,6 +1,7 @@
 package kotlinx.serialization
 
 import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.test.isJsLegacy
 import kotlin.test.*
 
 
@@ -32,6 +33,7 @@ class InheritableSerialInfoTest {
     class E3: A, B
 
     private fun doTest(descriptor: SerialDescriptor) {
+        if (isJsLegacy()) return // Unsupported
         val list = descriptor.annotations.filterIsInstance<InheritableDiscriminator>()
         assertEquals(1, list.size)
         assertEquals("a", list.first().discriminator)

@@ -8,6 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.builtins.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.modules.*
+import kotlinx.serialization.test.noLegacyJs
 import kotlin.test.*
 
 class JsonClassDiscriminatorTest : JsonTestBase() {
@@ -37,7 +38,7 @@ class JsonClassDiscriminatorTest : JsonTestBase() {
 
 
     @Test
-    fun testSealedClassesHaveCustomDiscriminator() {
+    fun testSealedClassesHaveCustomDiscriminator() = noLegacyJs {
         val messages = listOf(
             SealedMessage.StringMessage("string message", "foo"),
             SealedMessage.EOF
@@ -52,7 +53,7 @@ class JsonClassDiscriminatorTest : JsonTestBase() {
     }
 
     @Test
-    fun testAbstractClassesHaveCustomDiscriminator() {
+    fun testAbstractClassesHaveCustomDiscriminator() = noLegacyJs {
         val messages = listOf(
             AbstractMessage.StringMessage("string message", "foo"),
             AbstractMessage.IntMessage("int message", 42),
@@ -89,7 +90,7 @@ class JsonClassDiscriminatorTest : JsonTestBase() {
 
 
     @Test
-    fun testDocumentationInheritanceSample() {
+    fun testDocumentationInheritanceSample() = noLegacyJs {
         val module = SerializersModule {
             polymorphic(Base::class) {
                 subclass(BaseMessage.serializer())
